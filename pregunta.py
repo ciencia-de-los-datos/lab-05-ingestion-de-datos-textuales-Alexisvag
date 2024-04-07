@@ -17,6 +17,14 @@ def creaset():
     output_files = ["train_dataset.csv", "test_dataset.csv"]
     # Categorías de sentimientos (negative, positive, neutral)
     categories = ["negative", "positive", "neutral"]
+    
+    # Crear directorios si no existen
+    for path in paths:
+        for category in categories:
+            folder_path = "data" + path + category
+            if not os.path.exists(folder_path):
+                os.makedirs(folder_path)
+    
     # Itera sobre la enumeración de los nombres de archivos de salida
     for index, file_name in enumerate(output_files):
         # Abre el archivo CSV en modo de escritura y crea un escritor CSV
@@ -24,7 +32,7 @@ def creaset():
             csv_writer = csv.writer(csv_file)
             # Escribe una fila de encabezado con los nombres de columna "phrase" y "sentiment"
             csv_writer.writerow(["phrase", "sentiment"])
-                # Itera sobre cada categoría en las categorías de sentimientos
+        # Itera sobre cada categoría en las categorías de sentimientos
         for category in categories:
             # Construye la ruta completa al directorio de la categoría actual
             folder_path = "data" + paths[index] + category
